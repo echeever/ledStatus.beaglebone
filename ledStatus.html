@@ -1,0 +1,44 @@
+<html>
+<head>
+<HTTP-EQUIV = "PRAGMA" CONTENT="NO-CACHE"> 
+<title>BeagleBone rules</title>
+<body>
+Hello world.
+ <form action='/'>
+  <button name="status" type="submit" value="on">LED on</button><br/>
+  <button name="status" type="submit" value="off">LED off</button>
+ </form>
+ <br/>Turn LED on or off.
+ <br/>Count = <div id="cnt" style="display: inline">cnt</div>
+ <br/>Num is <div id="eo" style="display: inline">eo</div>
+ 
+ <script language="javascript" type="text/javascript">
+ document.getElementById("cnt").innerHTML="Did this work?"; 
+ function httpGet(theUrl)
+  {
+    var xmlHttp = null;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false );
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+  }
+  
+
+  var intervalID = setInterval(function(){
+    var dataString = httpGet('http://'+document.domain+':8080/data');
+    var ampStrings = dataString.split('&');
+    var cnt = ampStrings[1].split('=')[1];
+    var eo = ampStrings[2].split('=')[1];
+
+  
+    document.getElementById("cnt").innerHTML=cnt;
+    document.getElementById("eo").innerHTML=eo;
+  }, 2500);
+  
+  
+  
+  
+  
+</script>
+</body></html>
