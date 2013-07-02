@@ -28,7 +28,7 @@ setInterval(function() {
 //browser. It slso strips off the url request parameter string end and saves
 //it in the variable 'statReturn'. This variable is used by the function
 //above.
-fs.readFile('ledToggle.beaglebone/ledToggle.html', function (err, data) {
+fs.readFile('ledStatus.beaglebone/ledStatus.html', function (err, data) {
 if (err) throw err;
  http.createServer(function(req, res) {
   res.writeHead(200, {'Content-Type': 'html'});
